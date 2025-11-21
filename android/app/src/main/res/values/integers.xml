@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Integer Resources for Ball Sort Puzzle React Native App
+  Version codes, dimensions, and configuration values
+-->
+<resources>
+    
+    <!-- Google Play Services Version -->
+    <integer name="google_play_services_version">22600000</integer>
+    
+    <!-- AdMob Configuration -->
+    <integer name="admob_timeout_seconds">10</integer>
+    <integer name="admob_retry_delay_seconds">30</integer>
+    <integer name="admob_max_retries">3</integer>
+    
+    <!-- Game Configuration -->
+    <integer name="max_levels">1000</integer>
+    <integer name="max_tubes_per_level">12</integer>
+    <integer name="max_balls_per_tube">6</integer>
+    <integer name="max_colors_per_level">12</integer>
+    <integer name="default_moves_limit">100</integer>
+    <integer name="default_time_limit_minutes">30</integer>
+    
+    <!-- Difficulty Settings -->
+    <integer name="easy_levels_start">1</integer>
+    <integer name="easy_levels_end">100</integer>
+    <integer name="medium_levels_start">101</integer>
+    <integer name="medium_levels_end">300</integer>
+    <integer name="hard_levels_start">301</integer>
+    <integer name="hard_levels_end">600</integer>
+    <integer name="expert_levels_start">601</integer>
+    <integer name="expert_levels_end">1000</integer>
+    
+    <!-- Scoring System -->
+    <integer name="base_score_per_level">100</integer>
+    <integer name="time_bonus_multiplier">10</integer>
+    <integer name="move_bonus_multiplier">5</integer>
+    <integer name="perfect_level_bonus">500</integer>
+    <integer name="streak_bonus_multiplier">50</integer>
+    
+    <!-- Animation Durations (milliseconds) -->
+    <integer name="ball_move_duration">300</integer>
+    <integer name="tube_highlight_duration">200</integer>
+    <integer name="level_complete_animation">1000</integer>
+    <integer name="particle_effect_duration">800</integer>
+    <integer name="hint_animation_duration">500</integer>
+    <integer name="undo_animation_duration">250</integer>
+    
+    <!-- UI Configuration -->
+    <integer name="levels_per_page">20</integer>
+    <integer name="achievements_per_page">15</integer>
+    <integer name="leaderboard_entries_per_page">10</integer>
+    <integer name="statistics_chart_days">30</integer>
+    
+    <!-- Audio Configuration -->
+    <integer name="max_simultaneous_sounds">5</integer>
+    <integer name="sound_fade_duration">200</integer>
+    <integer name="music_fade_duration">1000</integer>
+    
+    <!-- Performance Settings -->
+    <integer name="frame_rate_target">60</integer>
+    <integer name="particle_count_max">50</integer>
+    <integer name="animation_quality_high">100</integer>
+    <integer name="animation_quality_medium">75</integer>
+    <integer name="animation_quality_low">50</integer>
+    
+    <!-- Save Game Configuration -->
+    <integer name="autosave_interval_seconds">30</integer>
+    <integer name="cloud_sync_interval_minutes">15</integer>
+    <integer name="backup_retention_days">30</integer>
+    
+    <!-- Network Configuration -->
+    <integer name="network_timeout_seconds">10</integer>
+    <integer name="network_retry_attempts">3</integer>
+    <integer name="network_retry_delay_seconds">5</integer>
+    
+    <!-- Achievement Thresholds -->
+    <integer name="achievement_level_10_threshold">10</integer>
+    <integer name="achievement_level_50_threshold">50</integer>
+    <integer name="achievement_level_100_threshold">100</integer>
+    <integer name="achievement_level_500_threshold">500</integer>
+    <integer name="achievement_speed_demon_seconds">30</integer>
+    <integer name="achievement_efficient_moves">15</integer>
+    <integer name="achievement_daily_player_days">7</integer>
+    <integer name="achievement_dedicated_player_days">30</integer>
+    
+    <!-- Hint System -->
+    <integer name="free_hints_per_day">3</integer>
+    <integer name="hint_cost_coins">10</integer>
+    <integer name="hint_cooldown_seconds">30</integer>
+    
+    <!-- Premium Features -->
+    <integer name="premium_unlimited_hints">999</integer>
+    <integer name="premium_bonus_coins_daily">50</integer>
+    <integer name="premium_additional_undos">10</integer>
+    
+    <!-- Notification Configuration -->
+    <integer name="daily_reminder_hour">19</integer>        <!-- 7 PM -->
+    <integer name="daily_reminder_minute">0</integer>
+    <integer name="comeback_reminder_hours">24</integer>
+    <integer name="weekly_summary_day">1</integer>          <!-- Monday -->
+    
+    <!-- Social Features -->
+    <integer name="friend_challenge_duration_hours">48</integer>
+    <integer name="leaderboard_update_interval_minutes">60</integer>
+    <integer name="social_share_cooldown_minutes">5</integer>
+    
+    <!-- Error Handling -->
+    <integer name="max_error_reports_per_session">5</integer>
+    <integer name="error_report_cooldown_minutes">10</integer>
+    
+    <!-- Performance Thresholds -->
+    <integer name="low_memory_threshold_mb">50</integer>
+    <integer name="fps_drop_threshold">45</integer>
+    <integer name="battery_optimization_threshold">20</integer>
+    
+    <!-- Tutorial Configuration -->
+    <integer name="tutorial_steps_count">5</integer>
+    <integer name="tutorial_auto_advance_seconds">10</integer>
+    
+    <!-- Level Generation -->
+    <integer name="min_solution_moves">5</integer>
+    <integer name="max_solution_moves">50</integer>
+    <integer name="level_generation_timeout_seconds">5</integer>
+    
+    <!-- UI Layout -->
+    <integer name="grid_columns_portrait">4</integer>
+    <integer name="grid_columns_landscape">6</integer>
+    <integer name="card_elevation_dp">4</integer>
+    <integer name="button_elevation_dp">2</integer>
+    
+    <!-- Version Configuration -->
+    <integer name="app_version_code">1</integer>
+    <integer name="min_supported_version">1</integer>
+    <integer name="data_version">1</integer>
+    
+    <!-- Testing Configuration -->
+    <integer name="test_level_count">10</integer>
+    <integer name="test_timeout_seconds">30</integer>
+    <integer name="debug_log_level">3</integer>             <!-- 0=None, 1=Error, 2=Warning, 3=Info, 4=Debug -->
+    
+</resources>

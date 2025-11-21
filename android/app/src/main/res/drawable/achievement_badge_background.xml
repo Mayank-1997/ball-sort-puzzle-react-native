@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Achievement badge background with gradient and border
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    
+    <gradient
+        android:type="radial"
+        android:gradientRadius="24dp"
+        android:startColor="@color/achievement_gold"
+        android:centerColor="@color/achievement_silver"
+        android:endColor="@color/achievement_bronze" />
+    
+    <stroke
+        android:width="2dp"
+        android:color="@color/on_primary_color" />
+        
+    <size
+        android:width="48dp"
+        android:height="48dp" />
+        
+</shape>

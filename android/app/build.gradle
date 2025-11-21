@@ -1,0 +1,290 @@
+apply plugin: "com.android.application"
+apply plugin: "org.jetbrains.kotlin.android"
+apply plugin: "com.facebook.react"
+
+/**
+ * Android Build Configuration for Ball Sort Puzzle Game
+ * Optimized for React Native 0.73.2 with support for API 21+ (Android 5.0) to API 34+ (Android 14+)
+ * Includes AdMob, Google Play Games Services, and performance optimizations
+ */
+
+def enableProguardInReleaseBuilds = true
+def enableSeparateBuildPerCPUArchitecture = false
+def enableHermes = project.ext.react.get("enableHermes", true)
+def jscFlavor = 'org.webkit:android-jsc:+'
+
+android {
+    ndkVersion rootProject.ext.ndkVersion
+    
+    // Compile and target SDK versions for latest Android compatibility
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    
+    namespace "com.ballsortpuzzle"
+    
+    defaultConfig {
+        applicationId "com.ballsortpuzzle"
+        minSdkVersion rootProject.ext.minSdkVersion  // API 21 - Android 5.0
+        targetSdkVersion rootProject.ext.targetSdkVersion  // API 34 - Android 14
+        versionCode 1
+        versionName "1.0.0"
+        
+        // Multi-dex support for older Android versions
+        multiDexEnabled true
+        
+        // Vector drawable support for older versions
+        vectorDrawables.useSupportLibrary = true
+        
+        // Performance optimization
+        resConfigs "en", "xxhdpi"
+        
+        // AdMob App ID - Replace with your actual AdMob App ID
+        manifestPlaceholders = [
+            admobAppId: "ca-app-pub-3940256099942544~3347511713"  // Test App ID
+        ]
+        
+        // Native architecture support
+        ndk {
+            abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
+        }
+    }
+    
+    // Signing configuration for release builds
+    signingConfigs {
+        debug {
+            storeFile file('debug.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+        release {
+            if (project.hasProperty('MYAPP_UPLOAD_STORE_FILE')) {
+                storeFile file(MYAPP_UPLOAD_STORE_FILE)
+                storePassword MYAPP_UPLOAD_STORE_PASSWORD
+                keyAlias MYAPP_UPLOAD_KEY_ALIAS
+                keyPassword MYAPP_UPLOAD_KEY_PASSWORD
+            }
+        }
+    }
+    
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+            debuggable true
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            
+            // AdMob test ads in debug mode
+            buildConfigField "Boolean", "ADMOB_TEST_MODE", "true"
+            buildConfigField "String", "ADMOB_BANNER_ID", "\"ca-app-pub-3940256099942544/6300978111\""
+            buildConfigField "String", "ADMOB_INTERSTITIAL_ID", "\"ca-app-pub-3940256099942544/1033173712\""
+            buildConfigField "String", "ADMOB_REWARDED_ID", "\"ca-app-pub-3940256099942544/5224354917\""
+        }
+        release {
+            // Release configuration
+            signingConfig signingConfigs.release
+            minifyEnabled enableProguardInReleaseBuilds
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            shrinkResources true
+            
+            // Production AdMob IDs - Replace with your actual IDs
+            buildConfigField "Boolean", "ADMOB_TEST_MODE", "false"
+            buildConfigField "String", "ADMOB_BANNER_ID", "\"ca-app-pub-XXXXXXXXXXXXXXXX/XXXXXXXXXX\""
+            buildConfigField "String", "ADMOB_INTERSTITIAL_ID", "\"ca-app-pub-XXXXXXXXXXXXXXXX/XXXXXXXXXX\""
+            buildConfigField "String", "ADMOB_REWARDED_ID", "\"ca-app-pub-XXXXXXXXXXXXXXXX/XXXXXXXXXX\""
+        }
+    }
+    
+    // Product flavors for different distributions
+    flavorDimensions "version"
+    productFlavors {
+        free {
+            dimension "version"
+            applicationIdSuffix ".free"
+            versionNameSuffix "-free"
+            buildConfigField "Boolean", "IS_PREMIUM", "false"
+        }
+        premium {
+            dimension "version"
+            applicationIdSuffix ".premium"
+            versionNameSuffix "-premium"
+            buildConfigField "Boolean", "IS_PREMIUM", "true"
+        }
+    }
+    
+    // Split APKs by CPU architecture for smaller downloads
+    splits {
+        abi {
+            reset()
+            enable enableSeparateBuildPerCPUArchitecture
+            universalApk false
+            include "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
+        }
+    }
+    
+    // Compile options for Java 8+ compatibility
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    
+    // Kotlin compiler options
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    
+    // Bundle configuration
+    bundle {
+        language {
+            enableSplit = false
+        }
+        density {
+            enableSplit = true
+        }
+        abi {
+            enableSplit = true
+        }
+    }
+    
+    // Packaging options to exclude duplicate files
+    packagingOptions {
+        pickFirst '**/libc++_shared.so'
+        pickFirst '**/libjsc.so'
+        pickFirst '**/libhermes.so'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+    }
+    
+    // Lint options
+    lintOptions {
+        disable 'MissingTranslation'
+        checkReleaseBuilds false
+        abortOnError false
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    
+    // React Native
+    implementation "com.facebook.react:react-android"
+    implementation "com.facebook.react:flipper-integration"
+    
+    // Hermes JavaScript engine
+    if (enableHermes) {
+        //noinspection GradleDynamicVersion
+        implementation("com.facebook.react:hermes-android")
+    } else {
+        implementation jscFlavor
+    }
+    
+    // Multi-dex support for older Android versions
+    implementation 'androidx.multidex:multidex:2.0.1'
+    
+    // Core Android libraries with backward compatibility
+    implementation 'androidx.core:core:1.12.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.activity:activity:1.8.2'
+    implementation 'androidx.fragment:fragment:1.6.2'
+    
+    // Material Design Components
+    implementation 'com.google.android.material:material:1.11.0'
+    
+    // Google Play Services for AdMob and Games
+    implementation 'com.google.android.gms:play-services-ads:22.6.0'
+    implementation 'com.google.android.gms:play-services-games-v2:20.0.0'
+    implementation 'com.google.android.gms:play-services-auth:20.7.0'
+    implementation 'com.google.android.gms:play-services-base:18.2.0'
+    
+    // Google Sign In
+    implementation 'com.google.android.gms:play-services-auth:20.7.0'
+    
+    // Firebase (if needed for additional features)
+    implementation platform('com.google.firebase:firebase-bom:32.7.0')
+    implementation 'com.google.firebase:firebase-analytics'
+    
+    // Vector drawable support
+    implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
+    implementation 'androidx.vectordrawable:vectordrawable-animated:1.1.0'
+    
+    // Performance and memory optimization
+    implementation 'androidx.startup:startup-runtime:1.1.1'
+    
+    // Debug-only dependencies
+    debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}")
+    debugImplementation("com.facebook.flipper:flipper-network-plugin:${FLIPPER_VERSION}") {
+        exclude group:'com.squareup.okhttp3', module:'okhttp'
+    }
+    debugImplementation("com.facebook.flipper:flipper-fresco-plugin:${FLIPPER_VERSION}")
+    
+    if (enableHermes) {
+        debugImplementation("com.facebook.react:hermes-executor-debug")
+        releaseImplementation("com.facebook.react:hermes-executor-release")
+    } else {
+        debugImplementation("org.webkit:android-jsc-debug")
+        releaseImplementation("org.webkit:android-jsc")
+    }
+    
+    // Testing dependencies
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+}
+
+// Auto-assign version codes for different architectures
+if (enableSeparateBuildPerCPUArchitecture) {
+    android.applicationVariants.configureEach { variant ->
+        variant.outputs.each { output ->
+            def versionCodes = ["armeabi-v7a": 1, "arm64-v8a": 2, "x86": 3, "x86_64": 4]
+            def abi = output.getFilter(com.android.build.OutputFile.ABI)
+            if (abi != null) {
+                output.versionCodeOverride =
+                    defaultConfig.versionCode * 1000 + versionCodes.get(abi)
+            }
+        }
+    }
+}
+
+// React Native build configuration
+react {
+    /* Folders */
+    root = file("../")
+    reactNativeDir = file("../node_modules/react-native")
+    codegenDir = file("../node_modules/@react-native/codegen")
+    cliFile = file("../node_modules/react-native/cli.js")
+    
+    /* Variants */
+    debuggableVariants = ["lintVitalAnalyzeDebug", "lintVitalAnalyzeRelease"]
+    
+    /* Bundling */
+    bundleCommand = "bundle"
+    bundleConfig = file("../metro.config.js")
+    bundleAssetName = "assets/index.android.bundle"
+    entryFile = file("../index.js")
+    extraPackagerArgs = []
+    
+    /* Hermes Commands */
+    hermesCommand = "../node_modules/react-native/sdks/hermesc/%OS-BIN%/hermesc"
+    hermesFlags = ["-O", "-output-source-map"]
+    
+    /* Autolinking */
+    autolinkLibrariesWithApp()
+}
+
+// Task to copy release APK to root directory for easy distribution
+android.applicationVariants.configureEach { variant ->
+    if (variant.buildType.name == "release") {
+        variant.outputs.configureEach { output ->
+            def task = project.tasks.create("copyReleaseApk${variant.name.capitalize()}", Copy) {
+                from output.outputFile
+                into project.rootDir
+                rename { String fileName ->
+                    "BallSortPuzzle-${variant.flavorName}-v${variant.versionName}.apk"
+                }
+            }
+            task.dependsOn variant.assemble
+        }
+    }
+}

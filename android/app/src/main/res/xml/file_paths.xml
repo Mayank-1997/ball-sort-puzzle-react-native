@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  File provider paths for sharing content
+  Allows sharing screenshots, save files, and other content
+-->
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <!-- Internal storage paths -->
+    <files-path
+        name="internal_files"
+        path="." />
+    
+    <!-- Cache directory for temporary files -->
+    <cache-path
+        name="cache_files"
+        path="." />
+    
+    <!-- External storage paths (if available) -->
+    <external-files-path
+        name="external_files"
+        path="." />
+    
+    <!-- External cache for temporary shared files -->
+    <external-cache-path
+        name="external_cache"
+        path="." />
+    
+    <!-- Screenshots directory -->
+    <files-path
+        name="screenshots"
+        path="screenshots/" />
+    
+    <!-- Save games directory -->
+    <files-path
+        name="saves"
+        path="saves/" />
+    
+    <!-- Shared content directory -->
+    <files-path
+        name="shared"
+        path="shared/" />
+        
+</paths>

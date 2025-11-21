@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ball Sort Puzzle - Web Version</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+        
+        .game-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            max-width: 800px;
+            width: 90%;
+        }
+        
+        .game-title {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .game-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .tube {
+            background: rgba(255, 255, 255, 0.2);
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px 10px 20px 20px;
+            height: 200px;
+            width: 80px;
+            display: flex;
+            flex-direction: column-reverse;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 10px 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .tube:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .tube.selected {
+            border-color: #FFD700;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+        
+        .ball {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin: 2px 0;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .ball:hover {
+            transform: scale(1.1);
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn.primary {
+            background: rgba(76, 175, 80, 0.7);
+            border-color: #4CAF50;
+        }
+        
+        .btn.secondary {
+            background: rgba(255, 152, 0, 0.7);
+            border-color: #FF9800;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .stat {
+            text-align: center;
+            margin: 10px;
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .instructions {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        
+        .instructions h3 {
+            margin-bottom: 10px;
+            color: #FFD700;
+        }
+        
+        .instructions ul {
+            list-style-position: inside;
+        }
+        
+        .instructions li {
+            margin: 5px 0;
+        }
+        
+        .level-complete {
+            background: rgba(76, 175, 80, 0.9);
+            border: 2px solid #4CAF50;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            display: none;
+        }
+        
+        .level-complete.show {
+            display: block;
+        }
+        
+        @media (max-width: 768px) {
+            .game-title {
+                font-size: 2rem;
+            }
+            
+            .game-board {
+                grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+                gap: 10px;
+            }
+            
+            .tube {
+                width: 60px;
+                height: 160px;
+            }
+            
+            .ball {
+                width: 45px;
+                height: 45px;
+            }
+            
+            .controls {
+                gap: 10px;
+            }
+            
+            .btn {
+                padding: 10px 16px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1 class="game-title">🎮 Ball Sort Puzzle</h1>
+        <p class="game-subtitle">Sort colored balls into matching tubes!</p>
+        
+        <div class="stats">
+            <div class="stat">
+                <span class="stat-value" id="level">1</span>
+                <span class="stat-label">Level</span>
+            </div>
+            <div class="stat">
+                <span class="stat-value" id="moves">0</span>
+                <span class="stat-label">Moves</span>
+            </div>
+            <div class="stat">
+                <span class="stat-value" id="time">00:00</span>
+                <span class="stat-label">Time</span>
+            </div>
+        </div>
+        
+        <div class="game-board" id="gameBoard">
+            <!-- Tubes will be generated here -->
+        </div>
+        
+        <div class="level-complete" id="levelComplete">
+            <h3>🎉 Level Complete!</h3>
+            <p>Great job! You completed the level.</p>
+        </div>
+        
+        <div class="controls">
+            <button class="btn primary" onclick="newGame()">New Game</button>
+            <button class="btn secondary" onclick="restartLevel()">Restart</button>
+            <button class="btn" onclick="undo()">Undo</button>
+            <button class="btn" onclick="hint()">Hint</button>
+        </div>
+        
+        <div class="instructions">
+            <h3>📋 How to Play:</h3>
+            <ul>
+                <li>Click a tube to select it, then click another tube to move the top ball</li>
+                <li>You can only move a ball onto another ball of the same color or into an empty tube</li>
+                <li>Sort all balls so each tube contains only one color</li>
+                <li>Use fewer moves for a better score!</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Game state
+        let gameState = {
+            tubes: [],
+            selectedTube: null,
+            moves: 0,
+            level: 1,
+            startTime: Date.now(),
+            history: []
+        };
+        
+        // Ball colors
+        const colors = [
+            '#FF5722', '#2196F3', '#4CAF50', '#FFC107',
+            '#9C27B0', '#FF9800', '#E91E63', '#00BCD4',
+            '#8BC34A', '#3F51B5', '#795548', '#607D8B'
+        ];
+        
+        // Initialize game
+        function initGame() {
+            generateLevel(gameState.level);
+            renderGame();
+            startTimer();
+        }
+        
+        // Generate a level
+        function generateLevel(level) {
+            const numColors = Math.min(4 + Math.floor(level / 3), 8);
+            const ballsPerColor = 4;
+            const extraTubes = 2;
+            
+            // Create balls array
+            let balls = [];
+            for (let i = 0; i < numColors; i++) {
+                for (let j = 0; j < ballsPerColor; j++) {
+                    balls.push(colors[i]);
+                }
+            }
+            
+            // Shuffle balls
+            for (let i = balls.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [balls[i], balls[j]] = [balls[j], balls[i]];
+            }
+            
+            // Create tubes
+            gameState.tubes = [];
+            const totalTubes = numColors + extraTubes;
+            
+            // Fill tubes with shuffled balls
+            for (let i = 0; i < totalTubes; i++) {
+                gameState.tubes.push([]);
+            }
+            
+            // Distribute balls to tubes (leaving some empty)
+            let ballIndex = 0;
+            for (let i = 0; i < totalTubes - extraTubes; i++) {
+                for (let j = 0; j < ballsPerColor; j++) {
+                    if (ballIndex < balls.length) {
+                        gameState.tubes[i].push(balls[ballIndex++]);
+                    }
+                }
+            }
+            
+            gameState.selectedTube = null;
+            gameState.moves = 0;
+            gameState.startTime = Date.now();
+            gameState.history = [];
+        }
+        
+        // Render the game
+        function renderGame() {
+            const gameBoard = document.getElementById('gameBoard');
+            gameBoard.innerHTML = '';
+            
+            gameState.tubes.forEach((tube, tubeIndex) => {
+                const tubeElement = document.createElement('div');
+                tubeElement.className = 'tube';
+                if (gameState.selectedTube === tubeIndex) {
+                    tubeElement.classList.add('selected');
+                }
+                tubeElement.onclick = () => selectTube(tubeIndex);
+                
+                tube.forEach((ballColor, ballIndex) => {
+                    const ballElement = document.createElement('div');
+                    ballElement.className = 'ball';
+                    ballElement.style.backgroundColor = ballColor;
+                    tubeElement.appendChild(ballElement);
+                });
+                
+                gameBoard.appendChild(tubeElement);
+            });
+            
+            // Update stats
+            document.getElementById('level').textContent = gameState.level;
+            document.getElementById('moves').textContent = gameState.moves;
+        }
+        
+        // Select tube
+        function selectTube(tubeIndex) {
+            if (gameState.selectedTube === null) {
+                // Select tube if it has balls
+                if (gameState.tubes[tubeIndex].length > 0) {
+                    gameState.selectedTube = tubeIndex;
+                }
+            } else if (gameState.selectedTube === tubeIndex) {
+                // Deselect if clicking the same tube
+                gameState.selectedTube = null;
+            } else {
+                // Try to move ball
+                moveBall(gameState.selectedTube, tubeIndex);
+                gameState.selectedTube = null;
+            }
+            renderGame();
+        }
+        
+        // Move ball between tubes
+        function moveBall(fromTube, toTube) {
+            const fromTubeArray = gameState.tubes[fromTube];
+            const toTubeArray = gameState.tubes[toTube];
+            
+            if (fromTubeArray.length === 0) return;
+            
+            const ballToMove = fromTubeArray[fromTubeArray.length - 1];
+            
+            // Check if move is valid
+            if (toTubeArray.length === 0 || 
+                (toTubeArray.length < 4 && toTubeArray[toTubeArray.length - 1] === ballToMove)) {
+                
+                // Save state for undo
+                gameState.history.push({
+                    tubes: gameState.tubes.map(tube => [...tube]),
+                    moves: gameState.moves
+                });
+                
+                // Move the ball
+                const ball = fromTubeArray.pop();
+                toTubeArray.push(ball);
+                gameState.moves++;
+                
+                // Check for level completion
+                if (checkLevelComplete()) {
+                    setTimeout(() => {
+                        document.getElementById('levelComplete').classList.add('show');
+                        setTimeout(() => {
+                            gameState.level++;
+                            nextLevel();
+                        }, 2000);
+                    }, 500);
+                }
+            }
+        }
+        
+        // Check if level is complete
+        function checkLevelComplete() {
+            return gameState.tubes.every(tube => {
+                if (tube.length === 0) return true;
+                if (tube.length !== 4) return false;
+                return tube.every(ball => ball === tube[0]);
+            });
+        }
+        
+        // Start new game
+        function newGame() {
+            gameState.level = 1;
+            document.getElementById('levelComplete').classList.remove('show');
+            initGame();
+        }
+        
+        // Restart current level
+        function restartLevel() {
+            document.getElementById('levelComplete').classList.remove('show');
+            generateLevel(gameState.level);
+            renderGame();
+        }
+        
+        // Next level
+        function nextLevel() {
+            document.getElementById('levelComplete').classList.remove('show');
+            generateLevel(gameState.level);
+            renderGame();
+        }
+        
+        // Undo last move
+        function undo() {
+            if (gameState.history.length > 0) {
+                const lastState = gameState.history.pop();
+                gameState.tubes = lastState.tubes;
+                gameState.moves = lastState.moves;
+                gameState.selectedTube = null;
+                renderGame();
+            }
+        }
+        
+        // Show hint
+        function hint() {
+            // Simple hint: highlight a possible move
+            for (let fromTube = 0; fromTube < gameState.tubes.length; fromTube++) {
+                const fromTubeArray = gameState.tubes[fromTube];
+                if (fromTubeArray.length === 0) continue;
+                
+                const ballToMove = fromTubeArray[fromTubeArray.length - 1];
+                
+                for (let toTube = 0; toTube < gameState.tubes.length; toTube++) {
+                    if (fromTube === toTube) continue;
+                    
+                    const toTubeArray = gameState.tubes[toTube];
+                    
+                    if (toTubeArray.length === 0 || 
+                        (toTubeArray.length < 4 && toTubeArray[toTubeArray.length - 1] === ballToMove)) {
+                        
+                        // Highlight the tubes
+                        gameState.selectedTube = fromTube;
+                        renderGame();
+                        
+                        setTimeout(() => {
+                            gameState.selectedTube = null;
+                            renderGame();
+                        }, 1500);
+                        
+                        return;
+                    }
+                }
+            }
+        }
+        
+        // Timer
+        function startTimer() {
+            setInterval(() => {
+                const elapsed = Math.floor((Date.now() - gameState.startTime) / 1000);
+                const minutes = Math.floor(elapsed / 60);
+                const seconds = elapsed % 60;
+                document.getElementById('time').textContent = 
+                    `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }, 1000);
+        }
+        
+        // Initialize game when page loads
+        window.onload = initGame;
+    </script>
+</body>
+</html>

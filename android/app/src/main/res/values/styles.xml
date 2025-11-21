@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Theme and Style Resources for Ball Sort Puzzle React Native App
+  Material Design 3 theme with custom colors and launch screen
+-->
+<resources>
+    
+    <!-- Base Application Theme -->
+    <style name="AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Primary Colors -->
+        <item name="colorPrimary">@color/primary_color</item>
+        <item name="colorOnPrimary">@color/on_primary_color</item>
+        <item name="colorPrimaryContainer">@color/primary_container_color</item>
+        <item name="colorOnPrimaryContainer">@color/on_primary_container_color</item>
+        
+        <!-- Secondary Colors -->
+        <item name="colorSecondary">@color/secondary_color</item>
+        <item name="colorOnSecondary">@color/on_secondary_color</item>
+        <item name="colorSecondaryContainer">@color/secondary_container_color</item>
+        <item name="colorOnSecondaryContainer">@color/on_secondary_container_color</item>
+        
+        <!-- Background Colors -->
+        <item name="android:colorBackground">@color/background_color</item>
+        <item name="colorOnBackground">@color/on_background_color</item>
+        <item name="colorSurface">@color/surface_color</item>
+        <item name="colorOnSurface">@color/on_surface_color</item>
+        
+        <!-- Status and Navigation Bar -->
+        <item name="android:statusBarColor">@color/primary_color</item>
+        <item name="android:navigationBarColor">@color/surface_color</item>
+        <item name="android:windowLightStatusBar">false</item>
+        
+        <!-- Window Properties -->
+        <item name="android:windowBackground">@color/background_color</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowDisablePreview">false</item>
+        
+        <!-- Activity Transitions -->
+        <item name="android:windowActivityTransitions">true</item>
+        <item name="android:windowEnterTransition">@android:transition/slide_right</item>
+        <item name="android:windowExitTransition">@android:transition/slide_left</item>
+        
+        <!-- Compatibility -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    
+    <!-- Launch Theme with Splash Screen -->
+    <style name="LaunchTheme" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/launch_screen</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowTranslucentNavigation">false</item>
+    </style>
+    
+    <!-- Splash Screen Theme (Android 12+) -->
+    <style name="SplashTheme" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/primary_color</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
+        <item name="windowSplashScreenAnimationDuration">300</item>
+        <item name="postSplashScreenTheme">@style/AppTheme</item>
+    </style>
+    
+    <!-- Button Styles -->
+    <style name="GameButton" parent="Widget.Material3.Button">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:paddingHorizontal">24dp</item>
+        <item name="android:paddingVertical">12dp</item>
+        <item name="cornerRadius">12dp</item>
+        <item name="android:elevation">4dp</item>
+    </style>
+    
+    <style name="GameButton.Primary">
+        <item name="backgroundTint">@color/primary_color</item>
+        <item name="android:textColor">@color/on_primary_color</item>
+    </style>
+    
+    <style name="GameButton.Secondary">
+        <item name="backgroundTint">@color/secondary_color</item>
+        <item name="android:textColor">@color/on_secondary_color</item>
+    </style>
+    
+    <style name="GameButton.Outlined" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:paddingHorizontal">24dp</item>
+        <item name="android:paddingVertical">12dp</item>
+        <item name="cornerRadius">12dp</item>
+        <item name="strokeColor">@color/primary_color</item>
+        <item name="strokeWidth">2dp</item>
+        <item name="android:textColor">@color/primary_color</item>
+    </style>
+    
+    <!-- Card Styles -->
+    <style name="GameCard" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardCornerRadius">16dp</item>
+        <item name="cardElevation">6dp</item>
+        <item name="cardBackgroundColor">@color/surface_color</item>
+        <item name="android:layout_margin">8dp</item>
+    </style>
+    
+    <!-- Text Styles -->
+    <style name="GameTitle" parent="TextAppearance.Material3.HeadlineLarge">
+        <item name="android:textSize">32sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/on_background_color</item>
+        <item name="android:gravity">center</item>
+    </style>
+    
+    <style name="GameSubtitle" parent="TextAppearance.Material3.HeadlineSmall">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/on_background_color</item>
+    </style>
+    
+    <style name="GameBody" parent="TextAppearance.Material3.BodyLarge">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/on_background_color</item>
+        <item name="android:lineSpacingExtra">2dp</item>
+    </style>
+    
+    <style name="GameCaption" parent="TextAppearance.Material3.BodySmall">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/on_surface_variant_color</item>
+    </style>
+    
+    <!-- Dialog Styles -->
+    <style name="GameDialog" parent="ThemeOverlay.Material3.Dialog">
+        <item name="dialogCornerRadius">16dp</item>
+        <item name="android:windowBackground">@drawable/dialog_background</item>
+    </style>
+    
+    <!-- FloatingActionButton Style -->
+    <style name="GameFAB" parent="Widget.Material3.FloatingActionButton.Primary">
+        <item name="android:layout_margin">16dp</item>
+        <item name="backgroundTint">@color/primary_color</item>
+        <item name="tint">@color/on_primary_color</item>
+        <item name="elevation">8dp</item>
+    </style>
+    
+    <!-- Toolbar Style -->
+    <style name="GameToolbar" parent="Widget.Material3.Toolbar">
+        <item name="android:background">@color/primary_color</item>
+        <item name="titleTextColor">@color/on_primary_color</item>
+        <item name="subtitleTextColor">@color/on_primary_color</item>
+        <item name="android:elevation">4dp</item>
+    </style>
+    
+    <!-- Bottom Navigation Style -->
+    <style name="GameBottomNavigation" parent="Widget.Material3.BottomNavigationView">
+        <item name="android:background">@color/surface_color</item>
+        <item name="itemIconTint">@color/bottom_nav_item_color</item>
+        <item name="itemTextColor">@color/bottom_nav_item_color</item>
+        <item name="android:elevation">8dp</item>
+    </style>
+    
+    <!-- Progress Bar Style -->
+    <style name="GameProgressBar" parent="Widget.Material3.LinearProgressIndicator">
+        <item name="trackColor">@color/progress_track_color</item>
+        <item name="indicatorColor">@color/primary_color</item>
+        <item name="trackThickness">8dp</item>
+        <item name="indicatorCornerRadius">4dp</item>
+        <item name="trackCornerRadius">4dp</item>
+    </style>
+    
+    <!-- Switch Style -->
+    <style name="GameSwitch" parent="Widget.Material3.CompoundButton.Switch">
+        <item name="thumbTint">@color/switch_thumb_color</item>
+        <item name="trackTint">@color/switch_track_color</item>
+    </style>
+    
+    <!-- Slider Style -->
+    <style name="GameSlider" parent="Widget.Material3.Slider">
+        <item name="activeTrackColor">@color/primary_color</item>
+        <item name="inactiveTrackColor">@color/inactive_track_color</item>
+        <item name="thumbColor">@color/primary_color</item>
+        <item name="labelBehavior">gone</item>
+    </style>
+    
+    <!-- Chip Style -->
+    <style name="GameChip" parent="Widget.Material3.Chip.Filter">
+        <item name="chipCornerRadius">16dp</item>
+        <item name="chipBackgroundColor">@color/chip_background_color</item>
+        <item name="android:textColor">@color/on_surface_color</item>
+        <item name="checkedIconTint">@color/primary_color</item>
+    </style>
+    
+    <!-- TabLayout Style -->
+    <style name="GameTabLayout" parent="Widget.Material3.TabLayout">
+        <item name="android:background">@color/surface_color</item>
+        <item name="tabTextColor">@color/on_surface_variant_color</item>
+        <item name="tabSelectedTextColor">@color/primary_color</item>
+        <item name="tabIndicatorColor">@color/primary_color</item>
+        <item name="tabIndicatorHeight">3dp</item>
+    </style>
+    
+    <!-- Achievement Badge Style -->
+    <style name="AchievementBadge">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:background">@drawable/achievement_badge_background</item>
+        <item name="android:scaleType">centerInside</item>
+        <item name="android:padding">8dp</item>
+    </style>
+    
+    <!-- Level Button Style -->
+    <style name="LevelButton">
+        <item name="android:layout_width">56dp</item>
+        <item name="android:layout_height">56dp</item>
+        <item name="android:background">@drawable/level_button_background</item>
+        <item name="android:textColor">@color/on_primary_color</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_margin">4dp</item>
+    </style>
+    
+    <!-- Statistics Card Style -->
+    <style name="StatCard" parent="GameCard">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginHorizontal">4dp</item>
+        <item name="android:padding">16dp</item>
+    </style>
+    
+</resources>

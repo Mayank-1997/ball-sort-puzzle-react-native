@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Launch Screen drawable for Ball Sort Puzzle React Native App
+  Material Design splash screen with game branding
+-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:opacity="opaque">
+    
+    <!-- Background gradient -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:type="linear"
+                android:angle="135"
+                android:startColor="@color/primary_color"
+                android:centerColor="@color/secondary_color"
+                android:endColor="@color/primary_container_color" />
+        </shape>
+    </item>
+    
+    <!-- App icon container -->
+    <item
+        android:width="120dp"
+        android:height="120dp"
+        android:gravity="center">
+        
+        <!-- Icon background circle -->
+        <shape android:shape="oval">
+            <solid android:color="@color/surface_color" />
+            <stroke
+                android:width="4dp"
+                android:color="@color/on_primary_color" />
+        </shape>
+    </item>
+    
+    <!-- App icon placeholder -->
+    <item
+        android:width="80dp"
+        android:height="80dp"
+        android:gravity="center">
+        
+        <!-- Tube representation -->
+        <shape android:shape="rectangle">
+            <solid android:color="@color/tube_color" />
+            <corners android:radius="8dp" />
+            <stroke
+                android:width="2dp"
+                android:color="@color/tube_border" />
+        </shape>
+    </item>
+    
+    <!-- Colored balls representation -->
+    <item
+        android:width="12dp"
+        android:height="12dp"
+        android:gravity="center|top"
+        android:top="20dp">
+        <shape android:shape="oval">
+            <solid android:color="@color/ball_red" />
+        </shape>
+    </item>
+    
+    <item
+        android:width="12dp"
+        android:height="12dp"
+        android:gravity="center"
+        android:top="8dp">
+        <shape android:shape="oval">
+            <solid android:color="@color/ball_blue" />
+        </shape>
+    </item>
+    
+    <item
+        android:width="12dp"
+        android:height="12dp"
+        android:gravity="center"
+        android:top="-4dp">
+        <shape android:shape="oval">
+            <solid android:color="@color/ball_green" />
+        </shape>
+    </item>
+    
+    <item
+        android:width="12dp"
+        android:height="12dp"
+        android:gravity="center|bottom"
+        android:bottom="20dp">
+        <shape android:shape="oval">
+            <solid android:color="@color/ball_yellow" />
+        </shape>
+    </item>
+    
+    <!-- App title text area -->
+    <item
+        android:gravity="center|bottom"
+        android:bottom="100dp">
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/transparent" />
+        </shape>
+    </item>
+    
+</layer-list>

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  String Resources for Ball Sort Puzzle React Native App
+  Includes app name, AdMob IDs, and Google Play Games configuration
+-->
+<resources>
+    <!-- App Information -->
+    <string name="app_name">Ball Sort Puzzle</string>
+    <string name="app_description">A fun and challenging puzzle game where you sort colored balls into tubes</string>
+    
+    <!-- Developer Information -->
+    <string name="developer_name">Your Developer Name</string>
+    <string name="developer_email">your.email@example.com</string>
+    
+    <!-- Google Play Games Services App ID -->
+    <!-- Replace with your actual Google Play Games App ID -->
+    <string name="google_play_games_app_id">123456789012</string>
+    
+    <!-- AdMob Ad Unit IDs - Test IDs for development -->
+    <!-- Replace these with your actual AdMob Ad Unit IDs for production -->
+    <string name="admob_banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="admob_interstitial_ad_unit_id">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="admob_rewarded_ad_unit_id">ca-app-pub-3940256099942544/5224354917</string>
+    
+    <!-- Game Content -->
+    <string name="game_title">Ball Sort Puzzle</string>
+    <string name="level_complete">Level Complete!</string>
+    <string name="game_over">Game Over</string>
+    <string name="new_high_score">New High Score!</string>
+    
+    <!-- Menu Items -->
+    <string name="play">Play</string>
+    <string name="levels">Levels</string>
+    <string name="settings">Settings</string>
+    <string name="achievements">Achievements</string>
+    <string name="leaderboards">Leaderboards</string>
+    <string name="statistics">Statistics</string>
+    <string name="about">About</string>
+    <string name="help">Help</string>
+    
+    <!-- Game Actions -->
+    <string name="restart">Restart</string>
+    <string name="hint">Hint</string>
+    <string name="undo">Undo</string>
+    <string name="pause">Pause</string>
+    <string name="resume">Resume</string>
+    <string name="next_level">Next Level</string>
+    <string name="try_again">Try Again</string>
+    
+    <!-- Settings -->
+    <string name="sound_effects">Sound Effects</string>
+    <string name="music">Music</string>
+    <string name="vibration">Vibration</string>
+    <string name="notifications">Notifications</string>
+    <string name="language">Language</string>
+    <string name="reset_progress">Reset Progress</string>
+    
+    <!-- Achievements -->
+    <string name="achievement_unlocked">Achievement Unlocked!</string>
+    <string name="view_achievements">View Achievements</string>
+    <string name="share_achievement">Share Achievement</string>
+    
+    <!-- Google Play Games -->
+    <string name="sign_in">Sign In</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="sign_in_google_play">Sign in to Google Play Games</string>
+    <string name="view_leaderboards">View Leaderboards</string>
+    <string name="compare_scores">Compare Scores</string>
+    
+    <!-- AdMob Related -->
+    <string name="watch_ad_for_hint">Watch ad for hint</string>
+    <string name="watch_ad_for_lives">Watch ad for extra moves</string>
+    <string name="remove_ads">Remove Ads</string>
+    <string name="ad_loading">Loading ad...</string>
+    <string name="ad_failed">Ad failed to load</string>
+    
+    <!-- Errors and Messages -->
+    <string name="error_loading_level">Error loading level</string>
+    <string name="error_saving_progress">Error saving progress</string>
+    <string name="network_error">Network connection required</string>
+    <string name="try_again_later">Please try again later</string>
+    <string name="loading">Loading...</string>
+    
+    <!-- Game Statistics -->
+    <string name="levels_completed">Levels Completed</string>
+    <string name="total_score">Total Score</string>
+    <string name="best_time">Best Time</string>
+    <string name="perfect_levels">Perfect Levels</string>
+    <string name="hints_used">Hints Used</string>
+    <string name="play_time">Play Time</string>
+    
+    <!-- Permissions and Privacy -->
+    <string name="permission_storage">Storage permission needed to save game progress</string>
+    <string name="permission_network">Network access needed for online features</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="terms_of_service">Terms of Service</string>
+    
+    <!-- Tutorial and Help -->
+    <string name="tutorial_welcome">Welcome to Ball Sort Puzzle!</string>
+    <string name="tutorial_objective">Sort colored balls by moving them between tubes</string>
+    <string name="tutorial_rules">Only move balls of the same color on top of each other</string>
+    <string name="tutorial_completion">Complete when all tubes have balls of the same color</string>
+    <string name="skip_tutorial">Skip Tutorial</string>
+    
+    <!-- Social Features -->
+    <string name="share_score">Share Score</string>
+    <string name="challenge_friends">Challenge Friends</string>
+    <string name="rate_app">Rate This App</string>
+    <string name="feedback">Send Feedback</string>
+    
+    <!-- Level Difficulty -->
+    <string name="easy">Easy</string>
+    <string name="medium">Medium</string>
+    <string name="hard">Hard</string>
+    <string name="expert">Expert</string>
+    
+    <!-- Time and Progress -->
+    <string name="time_format">%02d:%02d</string>
+    <string name="moves_count">Moves: %d</string>
+    <string name="level_progress">Level %d of %d</string>
+    <string name="progress_percent">%d%% Complete</string>
+    
+    <!-- Notifications -->
+    <string name="notification_daily_challenge">Daily Challenge Available!</string>
+    <string name="notification_comeback">Come back and continue your puzzle!</string>
+    <string name="notification_new_levels">New levels available!</string>
+    
+    <!-- Premium Features -->
+    <string name="premium_version">Premium Version</string>
+    <string name="unlock_all_levels">Unlock All Levels</string>
+    <string name="unlimited_hints">Unlimited Hints</string>
+    <string name="no_ads">No Advertisements</string>
+    
+    <!-- Common Actions -->
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="close">Close</string>
+    <string name="back">Back</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="continue_game">Continue</string>
+    <string name="save">Save</string>
+    <string name="load">Load</string>
+    
+    <!-- Difficulty Descriptions -->
+    <string name="easy_description">Perfect for beginners with simple patterns</string>
+    <string name="medium_description">Moderate challenge with more colors</string>
+    <string name="hard_description">Complex puzzles requiring strategy</string>
+    <string name="expert_description">Ultimate challenge for puzzle masters</string>
+    
+    <!-- Achievement Names -->
+    <string name="achievement_first_level">First Steps</string>
+    <string name="achievement_level_10">Getting Started</string>
+    <string name="achievement_level_50">Puzzle Enthusiast</string>
+    <string name="achievement_level_100">Century Club</string>
+    <string name="achievement_level_500">Puzzle Master</string>
+    <string name="achievement_perfect_level">Perfect Solver</string>
+    <string name="achievement_speed_demon">Speed Demon</string>
+    <string name="achievement_efficient_player">Efficiency Expert</string>
+    <string name="achievement_no_hints">Pure Skill</string>
+    <string name="achievement_comeback_king">Comeback King</string>
+    <string name="achievement_master_solver">Master Solver</string>
+    <string name="achievement_daily_player">Daily Dedication</string>
+    <string name="achievement_dedicated_player">Dedicated Player</string>
+    <string name="achievement_ball_master">Ball Master</string>
+    
+    <!-- File Provider Authority -->
+    <string name="file_provider_authority">com.ballsortpuzzle.fileprovider</string>
+</resources>

@@ -1,0 +1,160 @@
+/**
+ * Project-level build.gradle for Ball Sort Puzzle React Native App
+ * Configures global build settings, repositories, and dependency versions
+ */
+
+buildscript {
+    ext {
+        buildToolsVersion = "34.0.0"
+        minSdkVersion = 21           // Android 5.0 - Lollipop (supports 95%+ devices)
+        compileSdkVersion = 34       // Android 14 - Latest stable
+        targetSdkVersion = 34        // Android 14 - Latest stable
+        ndkVersion = "25.1.8937393"
+        kotlinVersion = "1.8.10"
+        
+        // React Native and related versions
+        reactNativeVersion = "0.73.2"
+        
+        // Google Play Services versions
+        googlePlayServicesVersion = "20.7.0"
+        googlePlayGamesVersion = "20.0.0"
+        firebaseBomVersion = "32.7.0"
+        
+        // Support library versions
+        supportLibVersion = "1.6.1"
+        
+        // Flipper version for debugging
+        FLIPPER_VERSION = "0.182.0"
+    }
+    
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+        maven { url "https://www.jitpack.io" }
+    }
+    
+    dependencies {
+        classpath("com.android.tools.build:gradle:8.1.4")
+        classpath("com.facebook.react:react-native-gradle-plugin")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
+        
+        // Google Services plugin for Firebase and AdMob
+        classpath 'com.google.gms:google-services:4.4.0'
+        
+        // Crashlytics plugin (optional for crash reporting)
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.9'
+        
+        // Performance monitoring plugin (optional)
+        classpath 'com.google.firebase:perf-plugin:1.4.2'
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url "https://www.jitpack.io" }
+        
+        // React Native repositories
+        maven { url("https://repo.maven.apache.org/maven2") }
+        
+        // Local React Native maven repository
+        maven {
+            url("$rootDir/../node_modules/react-native/android")
+            name("react-native")
+        }
+        
+        // Flipper repository for debugging
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+        
+        // Hermes repository
+        maven {
+            url("$rootDir/../node_modules/react-native/sdks/hermes/android")
+            name("hermes-engine")
+        }
+        
+        // JSC repository
+        maven {
+            url("$rootDir/../node_modules/jsc-android/dist")
+            name("jsc-android")
+        }
+    }
+    
+    // Configure all projects to use the same versions
+    configurations.all {
+        resolutionStrategy {
+            // Force specific versions to avoid conflicts
+            force 'androidx.core:core:1.12.0'
+            force 'androidx.appcompat:appcompat:1.6.1'
+            force 'androidx.fragment:fragment:1.6.2'
+            force 'androidx.activity:activity:1.8.2'
+            
+            // Google Play Services versions
+            force "com.google.android.gms:play-services-base:18.2.0"
+            force "com.google.android.gms:play-services-auth:20.7.0"
+            force "com.google.android.gms:play-services-games-v2:20.0.0"
+            force "com.google.android.gms:play-services-ads:22.6.0"
+            
+            // Material Design Components
+            force 'com.google.android.material:material:1.11.0'
+            
+            // Kotlin standard library
+            force "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+            force "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
+        }
+        
+        // Exclude conflicting dependencies
+        exclude group: "com.facebook.react", module: "react-native"
+        exclude group: "org.webkit", module: "android-jsc"
+    }
+}
+
+// Global task configuration
+tasks.register('clean', Delete) {
+    delete rootProject.buildDir
+}
+
+// Configure Java compilation options globally
+subprojects {
+    afterEvaluate { project ->
+        if (project.hasProperty("android")) {
+            android {
+                compileSdkVersion rootProject.ext.compileSdkVersion
+                buildToolsVersion rootProject.ext.buildToolsVersion
+                
+                compileOptions {
+                    sourceCompatibility JavaVersion.VERSION_1_8
+                    targetCompatibility JavaVersion.VERSION_1_8
+                }
+                
+                if (project.hasProperty("kotlinOptions")) {
+                    kotlinOptions {
+                        jvmTarget = '1.8'
+                    }
+                }
+                
+                // Configure lint for all modules
+                lintOptions {
+                    checkReleaseBuilds false
+                    abortOnError false
+                    disable 'InvalidPackage'
+                    disable 'MissingTranslation'
+                }
+            }
+        }
+        
+        // Configure test options
+        if (project.hasProperty("android")) {
+            android {
+                testOptions {
+                    unitTests.all {
+                        testLogging {
+                            events "passed", "skipped", "failed", "standardOut", "standardError"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

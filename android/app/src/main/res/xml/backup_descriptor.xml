@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Backup rules for Ball Sort Puzzle game data
+  Defines what data should be backed up to Google Drive
+-->
+<full-backup-content xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <!-- Include game progress and settings -->
+    <include domain="sharedpref" path="gameProgress.xml" />
+    <include domain="sharedpref" path="userSettings.xml" />
+    <include domain="sharedpref" path="achievements.xml" />
+    <include domain="sharedpref" path="statistics.xml" />
+    <include domain="sharedpref" path="levelProgress.xml" />
+    
+    <!-- Include saved games -->
+    <include domain="file" path="saves/" />
+    
+    <!-- Exclude sensitive data -->
+    <exclude domain="sharedpref" path="admob_preferences.xml" />
+    <exclude domain="sharedpref" path="google_play_games_cache.xml" />
+    <exclude domain="file" path="temp/" />
+    <exclude domain="file" path="cache/" />
+    <exclude domain="file" path="logs/" />
+    
+    <!-- Exclude system generated files -->
+    <exclude domain="database" path="." />
+    <exclude domain="external" path="." />
+    
+</full-backup-content>

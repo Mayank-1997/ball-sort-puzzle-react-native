@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Level button background with state-dependent colors
+-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <!-- Pressed state -->
+    <item android:state_pressed="true">
+        <shape android:shape="oval">
+            <solid android:color="@color/primary_container_color" />
+            <stroke
+                android:width="2dp"
+                android:color="@color/primary_color" />
+        </shape>
+    </item>
+    
+    <!-- Disabled/Locked state -->
+    <item android:state_enabled="false">
+        <shape android:shape="oval">
+            <solid android:color="@color/level_button_locked" />
+            <stroke
+                android:width="1dp"
+                android:color="@color/text_disabled" />
+        </shape>
+    </item>
+    
+    <!-- Selected/Completed state -->
+    <item android:state_selected="true">
+        <shape android:shape="oval">
+            <solid android:color="@color/level_button_completed" />
+            <stroke
+                android:width="2dp"
+                android:color="@color/success_color" />
+        </shape>
+    </item>
+    
+    <!-- Default/Enabled state -->
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="@color/level_button_enabled" />
+            <stroke
+                android:width="2dp"
+                android:color="@color/primary_color" />
+        </shape>
+    </item>
+    
+</selector>

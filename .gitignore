@@ -1,0 +1,134 @@
+node_modules/
+.expo/
+dist/
+npm-debug.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+
+# macOS
+.DS_Store
+
+# Temporary files created by Metro to check the health of the file watcher
+.metro-health-check*
+
+# Logs
+*.log
+
+# Android specific
+android/app/build/
+android/build/
+android/.gradle/
+android/gradle/
+*.hprof
+*.keystore
+!debug.keystore
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# React Native Web build files
+web-build/
+webpack.config.js
+
+# Test files
+coverage/
+
+# Environment files
+.env*
+
+# Backup files
+*.bak
+*.tmp
+logs/
+
+# Build artifacts
+android/app/build/
+android/build/
+ios/build/
+*.apk
+*.aab
+*.ipa
+
+# Testing
+coverage/
+.nyc_output/
+
+# Editor directories and files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Flipper
+Flipper-podfile.lock
+
+# Bundle artifacts
+*.jsbundle
+
+# Environment variables
+.env
+.env.local
+.env.production
+
+# Watchman
+.watchmanconfig
+
+# React Native
+.react-native/
+
+# Expo
+.expo/
+web-build/
+
+# CocoaPods
+ios/Pods/
+ios/Podfile.lock
+
+# Gradle
+android/.gradle/
+android/gradle/
+android/gradlew
+android/gradlew.bat
+
+# Firebase
+google-services.json
+GoogleService-Info.plist
+
+# Keystore files
+*.keystore
+*.jks
+release-key.keystore
+debug.keystore
+
+# Cache
+.cache/
+.parcel-cache/
+
+# Temporary directories
+tmp/
+temp/
+
+# OS generated files
+Thumbs.db
+Desktop.ini
+
+# Package managers
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Debug files
+android/app/src/main/assets/index.android.bundle*
+ios/main.jsbundle*
+
+# AdMob and sensitive configuration
+admob-config.json
+google-play-config.json
