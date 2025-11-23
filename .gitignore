@@ -22,8 +22,6 @@ web-build/
 # Android specific
 android/app/build/
 android/build/
-android/.gradle/
-android/gradle/
 *.hprof
 *.keystore
 !debug.keystore
