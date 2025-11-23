@@ -92,11 +92,7 @@ web-build/
 ios/Pods/
 ios/Podfile.lock
 
-# Gradle
-android/.gradle/
-android/gradle/
-android/gradlew
-android/gradlew.bat
+
 
 # Firebase
 google-services.json
