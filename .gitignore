@@ -20,11 +20,17 @@ web-build/
 *.log
 
 # Android specific
-android/app/build/
+
 android/build/
+android/.gradle/
+android/app/build/
+android/local.properties
 *.hprof
 *.keystore
 !debug.keystore
+*.class
+*.bin
+*.lock
 
 # IDE
 .idea/
@@ -50,7 +56,6 @@ logs/
 android/app/build/
 android/build/
 ios/build/
-*.apk
 *.aab
 *.ipa
 

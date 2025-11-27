@@ -79,15 +79,15 @@
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="${admobAppId}" />
         
+        <!-- Google Play Services Version - Required for AdMob and Play Games -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        
         <!-- Google Play Games Services App ID -->
         <meta-data
             android:name="com.google.android.gms.games.APP_ID"
             android:value="@string/google_play_games_app_id" />
-        
-        <!-- Google Play Games Version -->
-        <meta-data 
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
 
         <!-- Main Activity -->
         <activity
@@ -126,7 +126,8 @@
             android:name="com.google.android.gms.ads.AdActivity"
             android:exported="false"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|uiMode"
-            android:theme="@android:style/Theme.Translucent" />
+            android:theme="@android:style/Theme.Translucent"
+            tools:replace="android:configChanges" />
 
         <!-- React Native Development Activities (Debug only) -->
         <activity 

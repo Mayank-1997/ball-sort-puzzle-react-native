@@ -38,7 +38,7 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
                 @Override
                 protected List<ReactPackage> getPackages() {
                     @SuppressWarnings("UnnecessaryLocalVariable")
-                    List<ReactPackage> packages = new PackageList(this).getPackages();
+                    List<ReactPackage> packages = new PackageList(getApplication()).getPackages();
                     // Add custom packages here if needed
                     return packages;
                 }
@@ -59,7 +59,7 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
                 }
             };
 
-    private final ReactHost mReactHost = DefaultReactHost.getDefaultReactHost(this.getApplicationContext(), mReactNativeHost);
+    private ReactHost mReactHost;
 
     @Override
     public ReactNativeHost getReactNativeHost() {
@@ -68,6 +68,9 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
 
     @Override
     public ReactHost getReactHost() {
+        if (mReactHost == null) {
+            mReactHost = DefaultReactHost.getDefaultReactHost(getApplicationContext(), mReactNativeHost);
+        }
         return mReactHost;
     }
 

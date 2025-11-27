@@ -154,4 +154,7 @@
     <color name="semi_transparent_black">#80000000</color>   <!-- Semi-transparent Black -->
     <color name="semi_transparent_white">#80FFFFFF</color>   <!-- Semi-transparent White -->
     
+    <!-- Launcher Icon Colors -->
+    <color name="ic_launcher_background">#2C3E50</color>     <!-- Launcher Icon Background -->
+    
 </resources>

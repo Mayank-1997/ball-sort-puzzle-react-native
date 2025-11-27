@@ -10,7 +10,7 @@ apply plugin: "com.facebook.react"
 
 def enableProguardInReleaseBuilds = true
 def enableSeparateBuildPerCPUArchitecture = false
-def enableHermes = project.ext.react.get("enableHermes", true)
+def enableHermes = true  // Hermes is enabled by default in RN 0.73+
 def jscFlavor = 'org.webkit:android-jsc:+'
 
 android {
@@ -73,6 +73,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
             
+            // Hermes configuration
+            buildConfigField "Boolean", "IS_HERMES_ENABLED", enableHermes.toString()
+            buildConfigField "Boolean", "IS_NEW_ARCHITECTURE_ENABLED", "false"
+            
             // AdMob test ads in debug mode
             buildConfigField "Boolean", "ADMOB_TEST_MODE", "true"
             buildConfigField "String", "ADMOB_BANNER_ID", "\"ca-app-pub-3940256099942544/6300978111\""
@@ -85,6 +89,10 @@ android {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
             shrinkResources true
+            
+            // Hermes configuration
+            buildConfigField "Boolean", "IS_HERMES_ENABLED", enableHermes.toString()
+            buildConfigField "Boolean", "IS_NEW_ARCHITECTURE_ENABLED", "false"
             
             // Production AdMob IDs - Replace with your actual IDs
             buildConfigField "Boolean", "ADMOB_TEST_MODE", "false"
@@ -148,8 +156,13 @@ android {
     // Packaging options to exclude duplicate files
     packagingOptions {
         pickFirst '**/libc++_shared.so'
-        pickFirst '**/libjsc.so'
-        pickFirst '**/libhermes.so'
+        if (enableHermes) {
+            // When using Hermes, exclude JSC to avoid conflicts
+            exclude '**/libjsc.so'
+            pickFirst '**/libhermes.so'
+        } else {
+            pickFirst '**/libjsc.so'
+        }
         exclude 'META-INF/DEPENDENCIES'
         exclude 'META-INF/LICENSE'
         exclude 'META-INF/LICENSE.txt'
@@ -169,7 +182,12 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     
     // React Native
-    implementation "com.facebook.react:react-android"
+    implementation("com.facebook.react:react-android") {
+        if (enableHermes) {
+            // Exclude all JSC-related modules when using Hermes
+            exclude group: 'org.webkit', module: 'android-jsc'
+        }
+    }
     implementation "com.facebook.react:flipper-integration"
     
     // Hermes JavaScript engine
@@ -185,12 +203,13 @@ dependencies {
     
     // Core Android libraries with backward compatibility
     implementation 'androidx.core:core:1.12.0'
+    implementation 'androidx.core:core-splashscreen:1.0.1'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'androidx.activity:activity:1.8.2'
     implementation 'androidx.fragment:fragment:1.6.2'
     
-    // Material Design Components
-    implementation 'com.google.android.material:material:1.11.0'
+    // Material Design Components - Updated to latest stable version
+    implementation 'com.google.android.material:material:1.12.0'
     
     // Google Play Services for AdMob and Games
     implementation 'com.google.android.gms:play-services-ads:22.6.0'
@@ -201,9 +220,13 @@ dependencies {
     // Google Sign In
     implementation 'com.google.android.gms:play-services-auth:20.7.0'
     
-    // Firebase (if needed for additional features)
-    implementation platform('com.google.firebase:firebase-bom:32.7.0')
-    implementation 'com.google.firebase:firebase-analytics'
+    // Firebase removed - not needed for this app
+    // If you want to use Firebase in the future:
+    // 1. Apply plugin: 'com.google.gms.google-services' at the top of this file
+    // 2. Add google-services.json to android/app/
+    // 3. Uncomment the lines below:
+    // implementation platform('com.google.firebase:firebase-bom:32.7.0')
+    // implementation 'com.google.firebase:firebase-analytics'
     
     // Vector drawable support
     implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
@@ -217,15 +240,10 @@ dependencies {
     debugImplementation("com.facebook.flipper:flipper-network-plugin:${FLIPPER_VERSION}") {
         exclude group:'com.squareup.okhttp3', module:'okhttp'
     }
-    debugImplementation("com.facebook.flipper:flipper-fresco-plugin:${FLIPPER_VERSION}")
+    // Removed flipper-fresco-plugin due to duplicate class conflicts
     
-    if (enableHermes) {
-        debugImplementation("com.facebook.react:hermes-executor-debug")
-        releaseImplementation("com.facebook.react:hermes-executor-release")
-    } else {
-        debugImplementation("org.webkit:android-jsc-debug")
-        releaseImplementation("org.webkit:android-jsc")
-    }
+    // Hermes is already included above with hermes-android dependency
+    // No need for separate executor dependencies in RN 0.73+
     
     // Testing dependencies
     testImplementation 'junit:junit:4.13.2'
@@ -250,27 +268,27 @@ if (enableSeparateBuildPerCPUArchitecture) {
 // React Native build configuration
 react {
     /* Folders */
-    root = file("../")
-    reactNativeDir = file("../node_modules/react-native")
-    codegenDir = file("../node_modules/@react-native/codegen")
-    cliFile = file("../node_modules/react-native/cli.js")
+    root = file("$rootDir/..")
+    reactNativeDir = file("$rootDir/../node_modules/react-native")
+    codegenDir = file("$rootDir/../node_modules/@react-native/codegen")
+    cliFile = file("$rootDir/../node_modules/react-native/cli.js")
     
     /* Variants */
     debuggableVariants = ["lintVitalAnalyzeDebug", "lintVitalAnalyzeRelease"]
     
     /* Bundling */
     bundleCommand = "bundle"
-    bundleConfig = file("../metro.config.js")
+    bundleConfig = file("$rootDir/../metro.config.js")
     bundleAssetName = "assets/index.android.bundle"
-    entryFile = file("../index.js")
+    entryFile = file("$rootDir/../index.js")
     extraPackagerArgs = []
     
     /* Hermes Commands */
-    hermesCommand = "../node_modules/react-native/sdks/hermesc/%OS-BIN%/hermesc"
+    hermesCommand = "$rootDir/../node_modules/react-native/sdks/hermesc/%OS-BIN%/hermesc"
     hermesFlags = ["-O", "-output-source-map"]
     
-    /* Autolinking */
-    autolinkLibrariesWithApp()
+    /* Autolinking - handled automatically by the plugin */
+    // autolinkLibrariesWithApp() is deprecated, autolinking happens automatically
 }
 
 // Task to copy release APK to root directory for easy distribution

@@ -93,7 +93,7 @@ public class MainActivity extends ReactActivity {
     }
 
     @Override
-    protected void onNewIntent(Intent intent) {
+    public void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         Log.d(TAG, "New intent received: " + intent.toString());
         

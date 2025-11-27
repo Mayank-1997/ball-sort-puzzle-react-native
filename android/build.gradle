@@ -32,6 +32,12 @@ buildscript {
         mavenCentral()
         gradlePluginPortal()
         maven { url "https://www.jitpack.io" }
+        maven {
+            url("$rootDir/../node_modules/@react-native/gradle-plugin/android")
+        }
+        maven {
+            url("$rootDir/../node_modules/react-native/android")
+        }
     }
     
     dependencies {
@@ -70,7 +76,7 @@ allprojects {
         
         // Hermes repository
         maven {
-            url("$rootDir/../node_modules/react-native/sdks/hermes/android")
+            url("$rootDir/../node_modules/react-native/sdks/hermes-engine/android")
             name("hermes-engine")
         }
         
@@ -104,9 +110,8 @@ allprojects {
             force "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
         }
         
-        // Exclude conflicting dependencies
-        exclude group: "com.facebook.react", module: "react-native"
-        exclude group: "org.webkit", module: "android-jsc"
+        // Don't exclude React Native dependencies - they are needed!
+        // Only exclude specific conflicting modules if needed
     }
 }
 

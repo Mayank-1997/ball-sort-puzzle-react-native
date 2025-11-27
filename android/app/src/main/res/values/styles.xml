@@ -162,7 +162,6 @@
         <item name="trackColor">@color/progress_track_color</item>
         <item name="indicatorColor">@color/primary_color</item>
         <item name="trackThickness">8dp</item>
-        <item name="indicatorCornerRadius">4dp</item>
         <item name="trackCornerRadius">4dp</item>
     </style>
     
@@ -174,8 +173,8 @@
     
     <!-- Slider Style -->
     <style name="GameSlider" parent="Widget.Material3.Slider">
-        <item name="activeTrackColor">@color/primary_color</item>
-        <item name="inactiveTrackColor">@color/inactive_track_color</item>
+        <item name="trackColorActive">@color/primary_color</item>
+        <item name="trackColorInactive">@color/inactive_track_color</item>
         <item name="thumbColor">@color/primary_color</item>
         <item name="labelBehavior">gone</item>
     </style>
