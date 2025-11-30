@@ -107,13 +107,13 @@ android {
     productFlavors {
         free {
             dimension "version"
-            applicationIdSuffix ".free"
+            applicationId "com.ballsortpuzzle"  // Base package for free version (default)
             versionNameSuffix "-free"
             buildConfigField "Boolean", "IS_PREMIUM", "false"
         }
         premium {
             dimension "version"
-            applicationIdSuffix ".premium"
+            applicationId "com.ballsortpuzzle.premium"  // Different package for premium
             versionNameSuffix "-premium"
             buildConfigField "Boolean", "IS_PREMIUM", "true"
         }
