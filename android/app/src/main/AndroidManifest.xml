@@ -145,41 +145,6 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <!-- Backup Agent for game progress -->
-        <service
-            android:name=".backup.GameBackupAgent"
-            android:exported="false" />
-
-        <!-- Work Manager initialization -->
-        <provider
-            android:name="androidx.startup.InitializationProvider"
-            android:authorities="${applicationId}.androidx-startup"
-            android:exported="false"
-            tools:node="merge">
-            <meta-data
-                android:name="androidx.work.WorkManagerInitializer"
-                android:value="androidx.startup"
-                tools:node="remove" />
-        </provider>
-
-        <!-- Game state sync service -->
-        <service
-            android:name=".services.GameSyncService"
-            android:exported="false"
-            android:enabled="true" />
-
-        <!-- Notification channels for Android 8.0+ -->
-        <receiver
-            android:name=".notifications.NotificationReceiver"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
-                <action android:name="android.intent.action.PACKAGE_REPLACED" />
-                <data android:scheme="package" />
-            </intent-filter>
-        </receiver>
-
     </application>
 
     <!-- Queries declaration for Android 11+ package visibility -->
