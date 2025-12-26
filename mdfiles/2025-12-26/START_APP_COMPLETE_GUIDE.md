@@ -126,7 +126,10 @@ Metro waiting on port 8081
 **Terminal 2: Build, Install & Launch App**
 ```powershell
 # Open a NEW terminal window
-npx react-native run-android --variant=freeDebug
+npx react-native run-android --mode=freeDebug
+
+# Alternative (if above doesn't work):
+npx react-native run-android --mode debug --appIdSuffix free
 ```
 
 This single command will:
@@ -314,7 +317,7 @@ Remove-Item -Path "android\build" -Recurse -Force -ErrorAction SilentlyContinue
 npm install --legacy-peer-deps
 
 # 5. Rebuild and reinstall
-npx react-native run-android --variant=freeDebug
+npx react-native run-android --mode=freeDebug
 ```
 
 ---
@@ -351,7 +354,7 @@ Remove-Item -Path "node_modules" -Recurse -Force -ErrorAction SilentlyContinue
 npm install --legacy-peer-deps
 
 # 6. Rebuild
-npx react-native run-android --variant=freeDebug
+npx react-native run-android --mode=freeDebug
 ```
 
 ---
@@ -430,7 +433,7 @@ Start-Sleep -Seconds 10
 
 # Build and run
 Write-Host "🔨 Building and installing app..." -ForegroundColor Cyan
-npx react-native run-android --variant=freeDebug
+npx react-native run-android --mode=freeDebug
 
 Write-Host "✅ Done! Check your emulator." -ForegroundColor Green
 ```
@@ -619,7 +622,7 @@ Start-Process powershell -ArgumentList "-NoExit", "-Command", "npx react-native 
 
 # 9. Wait 10 seconds, then build
 Start-Sleep -Seconds 10
-npx react-native run-android --variant=freeDebug
+npx react-native run-android --mode=freeDebug
 ```
 
 ---
@@ -635,7 +638,7 @@ npx react-native run-android --variant=freeDebug
 npx react-native start --reset-cache
 
 # 3. Build and run (new terminal)
-npx react-native run-android --variant=freeDebug
+npx react-native run-android --mode=freeDebug
 ```
 
 **Making code changes:**
@@ -704,7 +707,7 @@ cd android
 npx react-native start --reset-cache
 
 # Terminal 2:
-npx react-native run-android --variant=freeDebug
+npx react-native run-android --mode=freeDebug
 ```
 
 **Expected result:**
