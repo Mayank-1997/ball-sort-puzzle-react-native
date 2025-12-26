@@ -18,6 +18,11 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 // Import screens
 import MenuScreen from './src/screens/MenuScreen';
 import GameScreen from './src/screens/GameScreen';
+import LevelSelectScreen from './src/screens/LevelSelectScreen';
+import SettingsScreen from './src/screens/SettingsScreen';
+import AchievementsScreen from './src/screens/AchievementsScreen';
+import LeaderboardScreen from './src/screens/LeaderboardScreen';
+import StatisticsScreen from './src/screens/StatisticsScreen';
 
 // Import services
 import { AudioManager } from './src/services/AudioManager';
