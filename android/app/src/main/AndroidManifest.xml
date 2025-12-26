@@ -67,7 +67,7 @@
         android:fullBackupContent="@xml/backup_descriptor"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="false"
+        android:usesCleartextTraffic="true"
         android:requestLegacyExternalStorage="false"
         android:hardwareAccelerated="true"
         android:largeHeap="true"
