@@ -306,3 +306,7 @@ android.applicationVariants.configureEach { variant ->
         }
     }
 }
+
+// Apply React Native autolinking for app dependencies
+apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle")
+applyNativeModulesAppBuildGradle(project)

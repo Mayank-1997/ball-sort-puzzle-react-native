@@ -1,28 +1,4 @@
 rootProject.name = 'BallSortPuzzle'
-
-// Include React Native Gradle Plugin from node_modules
-includeBuild('../node_modules/@react-native/gradle-plugin')
-
-// Configure plugin management for React Native
-pluginManagement {
-    repositories {
-        gradlePluginPortal()
-        google()
-        mavenCentral()
-    }
-}
-
-// Apply React Native Settings Plugin for autolinking
-plugins {
-    id("com.facebook.react.settings")
-}
-
-// Configure React Native autolinking
-// This automatically detects and includes all native modules from node_modules
-extensions.configure(com.facebook.react.ReactSettingsExtension) { ext ->
-    // Enable automatic linking of native modules
-    ext.autolinkLibrariesFromCommand()
-}
-
-// Include main application module
+apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
 include ':app'
+includeBuild('../node_modules/@react-native/gradle-plugin')
